@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tareas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="todo-container">
+    <h1>Lista de Tareas</h1>
+    <div class="input-container">
+      <input type="text" id="task-input" placeholder="Escribe una tarea...">
+      <button id="add-task-btn">Agregar</button>
+    </div>
+    <ul id="task-list"></ul>
+  </div>
+
+  <script>
+    // Selección de elementos
+    const taskInput = document.getElementById('task-input');
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const taskList = document.getElementById('task-list');
+
+    // Función para agregar tareas
+    addTaskBtn.addEventListener('click', () => {
+      const taskText = taskInput.value.trim();
+      if (taskText !== '') {
+        const taskItem = document.createElement('li');
+        taskItem.className = 'task-item';
+        taskItem.innerHTML = `${taskText} <button class="delete-btn">Eliminar</button>`;
+        taskList.appendChild(taskItem);
+        taskInput.value = '';
+      }
+    });
+
+    // Función para eliminar tareas
+    taskList.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-btn')) {
+        const taskItem = e.target.parentElement;
+        taskList.removeChild(taskItem);
+      }
+    });
+  </script>
+</body>
+</html>
